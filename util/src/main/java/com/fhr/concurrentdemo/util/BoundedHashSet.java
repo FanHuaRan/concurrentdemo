@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
 
+import net.jcip.annotations.ThreadSafe;
+
+
+@ThreadSafe
 public class BoundedHashSet<T> {
 	private final Set<T> set;
 	private final Semaphore sem;
