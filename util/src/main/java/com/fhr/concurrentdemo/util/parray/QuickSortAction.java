@@ -10,7 +10,7 @@ public class QuickSortAction extends RecursiveAction {
 	private static final long serialVersionUID = 94235895539994898L;
 
 	// 并行计算阈值
-	private static final int THRESHOLD = 100;
+	private static final int THRESHOLD = 20;
 
 	private final int low;
 

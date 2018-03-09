@@ -8,13 +8,25 @@
 		<artifactId>concurrentdemo</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>lock</artifactId>
-	<name>lock</name>
+	<artifactId>distributedlock</artifactId>
+	<name>distributedlock</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-	
+		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.39</version>
+		</dependency>
 	</dependencies>
 </project>
