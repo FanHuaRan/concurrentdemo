@@ -1,4 +1,4 @@
-package com.fhr.concurrentdemo.distributedlock;
+package com.fhr.concurrentdemo.distributedlock.zookeeper;
 
 import java.io.IOException;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package com.fhr.concurrentdemo.distributedlock;
+package com.fhr.concurrentdemo.distributedlock.redis;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +15,7 @@ import redis.clients.jedis.Jedis;
  * @author HuaRanFan
  *
  */
-public class RedisLock {
+public class RedisLock2 {
 	private Jedis jedisCli = new Jedis("localhost", 6381);
 
 	private int expireTime = 1;

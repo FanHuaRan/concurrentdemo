@@ -1,4 +1,4 @@
-package com.fhr.concurrentdemo.distributedlock;
+package com.fhr.concurrentdemo.distributedlock.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

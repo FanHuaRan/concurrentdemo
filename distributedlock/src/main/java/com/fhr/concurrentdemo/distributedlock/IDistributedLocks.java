@@ -1,8 +1,6 @@
 package com.fhr.concurrentdemo.distributedlock;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 
 /**
  * 分布式锁接口
@@ -10,49 +8,47 @@ import java.util.concurrent.locks.Lock;
  * @author HuaRanFan
  *
  */
-public interface IDistributedLock extends Lock {
+public interface IDistributedLocks {
 
 	/**
 	 * 获取锁，不响应中断
 	 * 
+	 * @param lockId
 	 */
-	void lock();
+	void lock(String lockId);
 
 	/**
 	 * 获取锁，响应中断
 	 * 
+	 * @param lockId
 	 * @throws InterruptedException
 	 */
-	void lockInterruptibly() throws InterruptedException;
+	void lockInterruptibly(String lockId) throws InterruptedException;
 
 	/**
 	 * 尝试获取锁，不阻塞
 	 * 
+	 * @param lockId
 	 * @return
 	 */
-	boolean tryLock();
+	boolean tryLock(String lockId);
 
 	/**
 	 * 尝试获取锁，带超时机制
 	 * 
+	 * @param lockId
 	 * @param time
 	 * @param unit
 	 * @return
 	 * @throws InterruptedException
 	 */
-	boolean tryLock(long time, TimeUnit unit) throws InterruptedException;
+	boolean tryLock(String lockId, long time, TimeUnit unit) throws InterruptedException;
 
 	/**
 	 * 释放锁
 	 * 
+	 * @param lockId
 	 */
-	void unlock();
-	
-	/**
-	 * 条件队列
-	 * @return
-	 */
-	default Condition newCondition() {
-		throw new UnsupportedOperationException("condition is not implement ! ");
-	}
+	void unlock(String lockId);
+
 }
