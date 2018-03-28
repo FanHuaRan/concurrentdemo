@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="distributedlock" />
         <module name="lock" />
+        <module name="logj" />
         <module name="tools" />
         <module name="util" />
       </profile>
@@ -16,6 +17,7 @@
       <module name="concurrentdemo" target="1.5" />
       <module name="distributedlock" target="1.8" />
       <module name="lock" target="1.8" />
+      <module name="logj" target="1.8" />
       <module name="tools" target="1.8" />
       <module name="util" target="1.8" />
     </bytecodeTargetLevel>

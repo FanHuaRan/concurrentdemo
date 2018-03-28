@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/concurrentdemo.iml" filepath="$PROJECT_DIR$/concurrentdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/distributedlock/distributedlock.iml" filepath="$PROJECT_DIR$/distributedlock/distributedlock.iml" />
       <module fileurl="file://$PROJECT_DIR$/lock/lock.iml" filepath="$PROJECT_DIR$/lock/lock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logj/logj.iml" filepath="$PROJECT_DIR$/logj/logj.iml" />
       <module fileurl="file://$PROJECT_DIR$/tools/tools.iml" filepath="$PROJECT_DIR$/tools/tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/util/util.iml" filepath="$PROJECT_DIR$/util/util.iml" />
     </modules>
