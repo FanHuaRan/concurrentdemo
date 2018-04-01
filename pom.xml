@@ -64,5 +64,8 @@
         <module>util</module>
         <module>distributedlock</module>
         <module>logj</module>
+        <module>cocurrentdemoswing</module>
+        <module>swing</module>
+        <module>swing</module>
     </modules>
 </project>

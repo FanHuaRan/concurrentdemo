@@ -1,4 +1,4 @@
-package com.fhr.concurrentdemo.util;
+package com.fhr.concurrentdemo.util.set;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,7 +7,12 @@ import java.util.concurrent.Semaphore;
 
 import net.jcip.annotations.ThreadSafe;
 
-
+/**
+ * @author FanHuaran
+ * @description 基于信号量的有界set
+ * @create 2018-04-01 12:42
+ * @param  <T>
+ **/
 @ThreadSafe
 public class BoundedHashSet<T> {
 	private final Set<T> set;

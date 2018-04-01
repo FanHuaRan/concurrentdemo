@@ -1,5 +1,7 @@
 package com.fhr.concurrentdemo.util;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * @author FanHuaran
  * @description 通过锁模拟CAS操作，

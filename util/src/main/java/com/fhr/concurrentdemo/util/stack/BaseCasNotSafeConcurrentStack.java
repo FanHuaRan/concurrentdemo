@@ -1,9 +1,16 @@
-package com.fhr.concurrentdemo.util;
+package com.fhr.concurrentdemo.util.stack;
 
 import java.util.concurrent.atomic.AtomicReference;
 
 import net.jcip.annotations.NotThreadSafe;
 
+
+/**
+ * @author FanHuaran
+ * @description  基于CAS的含有ABA问题的并发栈
+ * @create 2018-04-01 12:42
+ * @param  <T>
+ **/
 @NotThreadSafe
 public class BaseCasNotSafeConcurrentStack<T> {
 	private final AtomicReference<Node<T>> top = new AtomicReference<Node<T>>();

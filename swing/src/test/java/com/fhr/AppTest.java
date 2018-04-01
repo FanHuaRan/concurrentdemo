@@ -1,4 +1,4 @@
-package com.fhr.concurrentdemo.lock;
+package com.fhr;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -10,8 +10,6 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
-
-
     /**
      * Create the test case
      *
