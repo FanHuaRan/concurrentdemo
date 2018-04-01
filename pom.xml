@@ -16,11 +16,10 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.io7m.jcip/jcip-annotations -->
         <dependency>
-            <groupId>com.io7m.jcip</groupId>
+            <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
-            <version>1.0.2</version>
+            <version>RELEASE</version>
         </dependency>
 
 
@@ -64,8 +63,6 @@
         <module>util</module>
         <module>distributedlock</module>
         <module>logj</module>
-        <module>cocurrentdemoswing</module>
-        <module>swing</module>
         <module>swing</module>
     </modules>
 </project>
