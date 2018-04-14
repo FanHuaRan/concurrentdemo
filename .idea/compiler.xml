@@ -6,18 +6,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="base" />
+        <module name="cache" />
         <module name="distributedlock" />
         <module name="lock" />
         <module name="logj" />
+        <module name="swing" />
         <module name="tools" />
         <module name="util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="base" target="1.8" />
+      <module name="cache" target="1.8" />
+      <module name="cocurrentdemoswing" target="1.8" />
       <module name="concurrentdemo" target="1.5" />
       <module name="distributedlock" target="1.8" />
       <module name="lock" target="1.8" />
       <module name="logj" target="1.8" />
+      <module name="swing" target="1.8" />
       <module name="tools" target="1.8" />
       <module name="util" target="1.8" />
     </bytecodeTargetLevel>

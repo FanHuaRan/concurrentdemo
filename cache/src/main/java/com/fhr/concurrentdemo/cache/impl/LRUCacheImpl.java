@@ -6,28 +6,46 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author FanHuaran
- * @description 依靠LinkedHashMap+读写锁实现LRU缓存
+ * @description 依靠LinkedHashMap+ReentrantLock实现
+ * 缓存过期实现策略是：懒汉式，get等读数据的方法时进行判断再删除
  * @create 2018-04-13 17:08
  **/
 public class LRUCacheImpl implements MemoryCache {
+    /**
+     * 默认缓存容量
+     */
+
     public static final int DEFAULT_CAPACITY = 10000;
-    // 默认过期时间,负数也代表不过期
+    /**
+     * 默认过期时间
+     */
+
     public static final int DEFAULT_EXPIRED = -1;
-
-    // 默认时间单位
+    /**
+     * 默认时间单位
+     */
     public static final TimeUnit DEFAULT_UNIT = TimeUnit.MILLISECONDS;
-
-    // 默认空闲失效时间，负数代表不失效， 空闲失效时间<DEFAULT_EXPIRED才有意义
+    /**
+     * 默认空闲失效时间
+     */
     public static final int DEFAULT_IDLE = -1;
 
-    protected final ReentrantLock lock = new ReentrantLock();
-
+    /**
+     * 临界区锁
+     */
+    protected final Lock lock = new ReentrantLock();
+    /**
+     * 缓存容量
+     */
     protected final int capacity;
-
+    /**
+     * 数据值map
+     */
     protected final Map<String, CacheData> dataMap;
 
     public LRUCacheImpl(int capacity) {
@@ -35,15 +53,25 @@ public class LRUCacheImpl implements MemoryCache {
         this.dataMap = new LRUCacheMap(capacity);
     }
 
+    public LRUCacheImpl() {
+        this.capacity = DEFAULT_CAPACITY;
+        this.dataMap = new LRUCacheMap(capacity);
+    }
+
     /**
      * 数据缓存map
      */
     protected static class LRUCacheMap extends LinkedHashMap<String, CacheData> {
+        private static final long serialVersionUID = -8877631318777599412L;
+
         /**
          * 0.5的装载因子效果更好
          */
         protected static final float LOAD_FACTOR = 0.5F;
 
+        /**
+         * 缓存容量
+         */
         protected final int cacheCapacity;
 
         /**
@@ -73,19 +101,19 @@ public class LRUCacheImpl implements MemoryCache {
     protected static class CacheData implements Serializable {
         private static final long serialVersionUID = 4984609820856644770L;
 
-        private final long insertTime;
+        protected final long insertTime;
 
-        private final long expired;
+        protected final long expired;
 
-        private final long idle;
+        protected final long idle;
 
-        private final Object value;
+        protected final Object value;
 
-        private final boolean willExpired;
+        protected final boolean willExpired;
 
-        private final boolean willIdle;
+        protected final boolean willIdle;
 
-        private long accessTime;
+        protected long accessTime;
 
         public CacheData(long insertTime, long expired, long idle, Object value, boolean willExpired, boolean willIdle) {
             this.insertTime = insertTime;
@@ -243,14 +271,17 @@ public class LRUCacheImpl implements MemoryCache {
         }
     }
 
-
     /* ---------------- private operations -------------- */
+
+    /**
+     * 获取数据，可能会删除过期数据
+     *
+     * @param key
+     * @return
+     */
     private CacheData getData(String key) {
         CacheData cacheData = dataMap.get(key);
-        if (cacheData == null) {
-            return null;
-        }
-        if (isIdle(cacheData) || isExpired(cacheData)) {
+        if (cacheData == null || isIdle(cacheData) || isExpired(cacheData)) {
             remove(key);
             return null;
         }
@@ -258,10 +289,29 @@ public class LRUCacheImpl implements MemoryCache {
         return cacheData;
     }
 
+    /**
+     * 缓存数据
+     *
+     * @param key
+     * @param value
+     * @param expired
+     * @param idle
+     * @param unit
+     */
     private void setData(String key, Object value, int expired, int idle, TimeUnit unit) {
         dataMap.put(key, createCacheDataByNow(value, expired, idle, unit));
     }
 
+    /**
+     * 若无则缓存数据
+     *
+     * @param key
+     * @param value
+     * @param expired
+     * @param idle
+     * @param unit
+     * @return
+     */
     private CacheData putIfAbsentData(String key, Object value, int expired, int idle, TimeUnit unit) {
         CacheData cacheData = dataMap.get(key);
         if (cacheData != null) {
@@ -270,28 +320,55 @@ public class LRUCacheImpl implements MemoryCache {
         return cacheData;
     }
 
+    /**
+     * 判断是否空闲失效
+     *
+     * @param data
+     * @return
+     */
     private boolean isIdle(CacheData data) {
         return data.willIdle && data.idle >= (System.currentTimeMillis() - data.accessTime);
     }
 
+    /**
+     * 判断是否过期
+     *
+     * @param data
+     * @return
+     */
     private boolean isExpired(CacheData data) {
         return data.willExpired && data.expired >= (System.currentTimeMillis() - data.insertTime);
     }
 
     /* ---------------- Static utilities -------------- */
 
+    /**
+     * 检查过期参数
+     *
+     * @param expired
+     */
     private static void checkExpired(int expired) {
         if (expired < 0) {
             throw new IllegalArgumentException("expired must more than 0");
         }
     }
 
+    /**
+     * 检查空闲参数
+     *
+     * @param idle
+     */
     private static void checkIdle(int idle) {
         if (idle < 0) {
             throw new IllegalArgumentException("idle must more than 0");
         }
     }
 
+    /**
+     * 检查unit
+     *
+     * @param unit
+     */
     private static void checkUnit(TimeUnit unit) {
         if (unit == null) {
             throw new IllegalArgumentException("unit not be null");
