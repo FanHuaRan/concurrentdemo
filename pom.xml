@@ -64,5 +64,7 @@
         <module>distributedlock</module>
         <module>logj</module>
         <module>swing</module>
+        <module>cache</module>
+        <module>base</module>
     </modules>
 </project>
