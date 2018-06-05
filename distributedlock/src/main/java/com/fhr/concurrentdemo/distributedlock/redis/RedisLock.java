@@ -26,17 +26,15 @@ public class RedisLock implements IDistributedLock {
 	@Override
 	public void lock() {
 		while (true) {
-			long returnFlag = Jedis.setnx(lockID, "1");
+			long returnFlag = jedis.setnx(String.valueOf(lockId), "1");
 			if (returnFlag == 1) {
 				System.out.println(Thread.currentThread().getName() + " get lock....");
-				return true;
 			}
 			System.out.println(Thread.currentThread().getName() + " is trying lock....");
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-				return false;
 			}
 		}
 
