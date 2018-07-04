@@ -15,17 +15,11 @@ import java.io.Serializable;
  */
 public class DelayJob<T extends Serializable> implements Job {
 
-	private final Task<T> task;
-
-	private final TaskHandler<T> taskHandler;
-
-	public DelayJob(Task<T> task, TaskHandler<T> taskHandler) {
-		this.task = task;
-		this.taskHandler = taskHandler;
-	}
-
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
+		TaskHandler<T> taskHandler = (TaskHandler<T>) context.getJobDetail().getJobDataMap().get(QuartzDelayConstant.HANDLER_KEY);
+		Task<T> task = (Task<T>) context.getJobDetail().getJobDataMap().get(QuartzDelayConstant.TASK_KEY);
+
 		taskHandler.handle(task);
 	}
 }
