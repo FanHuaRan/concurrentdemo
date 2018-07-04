@@ -36,6 +36,13 @@
             <artifactId>guava</artifactId>
             <version>23.6-jre</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -74,5 +81,6 @@
         <module>cache</module>
         <module>base</module>
         <module>qps</module>
+        <module>delaytask</module>
     </modules>
 </project>
