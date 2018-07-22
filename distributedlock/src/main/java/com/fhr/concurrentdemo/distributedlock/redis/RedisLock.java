@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import com.fhr.concurrentdemo.distributedlock.IDistributedLock;
 
 import redis.clients.jedis.Jedis;
-
+// TODO jedis不是线程安全的，所以不应该这样用！！！！
 public class RedisLock implements IDistributedLock {
 	
 	private static final int DEFAULT_EXPIRED_SECOND = 100;
@@ -26,6 +26,7 @@ public class RedisLock implements IDistributedLock {
 	@Override
 	public void lock() {
 		while (true) {
+
 			long returnFlag = jedis.setnx(String.valueOf(lockId), "1");
 			if (returnFlag == 1) {
 				System.out.println(Thread.currentThread().getName() + " get lock....");

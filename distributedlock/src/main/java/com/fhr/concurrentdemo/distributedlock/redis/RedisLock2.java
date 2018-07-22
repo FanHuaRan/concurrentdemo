@@ -4,6 +4,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.Transaction;
 
 /**
  * 基于Redis缓存实现的锁
@@ -15,6 +17,7 @@ import redis.clients.jedis.Jedis;
  * @author HuaRanFan
  *
  */
+// TODO jedis不是线程安全的，所以不应该这样用！！！！
 public class RedisLock2 {
 	private Jedis jedisCli = new Jedis("localhost", 6381);
 
