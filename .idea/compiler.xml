@@ -8,9 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="base" />
         <module name="cache" />
+        <module name="delaytask" />
         <module name="distributedlock" />
         <module name="lock" />
         <module name="logj" />
+        <module name="qps" />
         <module name="swing" />
         <module name="tools" />
         <module name="util" />
@@ -21,9 +23,11 @@
       <module name="cache" target="1.8" />
       <module name="cocurrentdemoswing" target="1.8" />
       <module name="concurrentdemo" target="1.5" />
+      <module name="delaytask" target="1.8" />
       <module name="distributedlock" target="1.8" />
       <module name="lock" target="1.8" />
       <module name="logj" target="1.8" />
+      <module name="qps" target="1.8" />
       <module name="swing" target="1.8" />
       <module name="tools" target="1.8" />
       <module name="util" target="1.8" />
